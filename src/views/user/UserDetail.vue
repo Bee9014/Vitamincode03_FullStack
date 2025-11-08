@@ -1,4 +1,4 @@
-<template>
+  <template>
   <button
     class="px-3 py-2 bg-sky-500 hover:bg-sky-500/80 duration-200 text-white rounded cursor-pointer"
     @click="handleBackToListUser"
@@ -10,32 +10,16 @@
   </router-link> -->
 
   <h1>User detail</h1>
-  <p>User ID: {{ route.params.id }}</p>
+  <p>User name: {{ route.params.username }}</p>
   <!-- lấy được ID rồi thì truyền ID vào API để GET -->
   <div class="flex flex-col gap-2">
     <div class="flex flex-col gap-1">
       <label class="font-semibold">Username</label>
-      <input
-        type="text"
-        class="border border-[#f5f5f5] px-2 py-1 rounded"
-        :value="userStore.user?.username"
-      />
+      <input type="text" class="border border-[#f5f5f5] px-2 py-1 rounded" :value="userStore.user?.data?.username"/>
     </div>
     <div class="flex flex-col gap-1">
-      <label class="font-semibold">Fullname</label>
-      <input
-        type="text"
-        class="border border-[#f5f5f5] px-2 py-1 rounded"
-        :value="userStore.user?.name"
-      />
-    </div>
-    <div class="flex flex-col gap-1">
-      <label class="font-semibold">Email</label>
-      <input
-        type="text"
-        class="border border-[#f5f5f5] px-2 py-1 rounded"
-        :value="userStore.user?.email"
-      />
+      <label class="font-semibold">Role</label>
+      <input type="text" class="border border-[#f5f5f5] px-2 py-1 rounded" :value="userStore.user?.data?.role"/>
     </div>
   </div>
 </template>
@@ -44,6 +28,10 @@
 import { onMounted } from "vue"
 import { useRouter, useRoute } from "vue-router"
 import { useUserStore } from "../../stores/userStore"
+import { ref } from "vue"
+
+
+
 
 const route = useRoute()
 const router = useRouter()
@@ -54,6 +42,6 @@ const handleBackToListUser = () => {
 }
 
 onMounted(() => {
-  userStore.getUserInfo(route.params.id)
+  userStore.getUsername(route.params.username)
 })
 </script>
